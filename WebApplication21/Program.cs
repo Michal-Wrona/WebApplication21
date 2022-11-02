@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using WebApplication21.Core.Data;
+using WebApplication21.Core.Entities;
+using WebApplication21.Core.Interfaces;
+using WebApplication21.Core.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +13,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<WebApplication21DbContext>(opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<WebApplication21DbContext>
+    (opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// builder.Services.AddScoped<IBookRepository<BaseEntity>, BookRepository<BaseEntity>>();
+
+builder.Services.AddScoped(typeof(IBookRepository<>), typeof(BookRepository<>));
 
 var app = builder.Build();
 
