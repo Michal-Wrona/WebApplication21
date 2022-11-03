@@ -10,12 +10,12 @@ using WebApplication21.Core.Interfaces;
 
 namespace WebApplication21.Core.Repositories
 {
-    public class BookRepository<T> : IBookRepository<T> where T : BaseEntity
+    public class EntityRepository<T> : IEntityRepository<T> where T : BaseEntity
     {
         private readonly WebApplication21DbContext _context;
         private readonly DbSet<T> _entities;
 
-        public BookRepository(WebApplication21DbContext context)
+        public EntityRepository(WebApplication21DbContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _entities = _context.Set<T>();
@@ -40,6 +40,15 @@ namespace WebApplication21.Core.Repositories
         public void Delete(int id)
         {
 
+        }
+
+        public async Task UpdateAsync(T entity)
+        {
+            _entities.Attach(entity);
+
+            _context.Entry(entity).State = EntityState.Modified;
+
+            await _context.SaveChangesAsync();
         }
 
         public async Task<bool> SaveChangesAsync()

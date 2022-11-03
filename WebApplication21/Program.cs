@@ -1,8 +1,14 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using WebApplication21.Core.Data;
 using WebApplication21.Core.Entities;
+using WebApplication21.Core.Helpers;
 using WebApplication21.Core.Interfaces;
 using WebApplication21.Core.Repositories;
+using WebApplication21.Core.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +24,31 @@ builder.Services.AddDbContext<WebApplication21DbContext>
 
 // builder.Services.AddScoped<IBookRepository<BaseEntity>, BookRepository<BaseEntity>>();
 
-builder.Services.AddScoped(typeof(IBookRepository<>), typeof(BookRepository<>));
+builder.Services.AddScoped(typeof(IEntityRepository<>), typeof(EntityRepository<>));
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(opt =>
+    {
+        opt.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["TokenKey"])),
+        };
+    });
+
+builder.Services.AddScoped<ITokenService, TokenService>();
+
+builder.Services.AddIdentityCore<User>(opt =>
+{
+    opt.Password.RequireNonAlphanumeric = false;
+})
+    .AddRoles<AppRole>()
+    .AddRoleManager<RoleManager<AppRole>>()
+    .AddSignInManager<SignInManager<User>>()
+    .AddRoleValidator<RoleValidator<AppRole>>()
+    .AddEntityFrameworkStores<WebApplication21DbContext>();
+
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 var app = builder.Build();
 
@@ -30,6 +60,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

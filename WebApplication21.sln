@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication21", "WebApplication21\WebApplication21.csproj", "{1A0AF36C-CEA9-4FBC-838D-9DC9EF7C0327}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication21", "WebApplication21\WebApplication21.csproj", "{1A0AF36C-CEA9-4FBC-838D-9DC9EF7C0327}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication21.Core", "WebApplication21.Core\WebApplication21.Core.csproj", "{D1DF602D-D7C4-4454-A601-8B7228B6B9B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication21.Core", "WebApplication21.Core\WebApplication21.Core.csproj", "{D1DF602D-D7C4-4454-A601-8B7228B6B9B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication21.Api", "WebApplication21.Api\WebApplication21.Api.csproj", "{B640F791-A277-444D-B1F0-A6F9B4CD58C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{D1DF602D-D7C4-4454-A601-8B7228B6B9B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1DF602D-D7C4-4454-A601-8B7228B6B9B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1DF602D-D7C4-4454-A601-8B7228B6B9B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B640F791-A277-444D-B1F0-A6F9B4CD58C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B640F791-A277-444D-B1F0-A6F9B4CD58C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B640F791-A277-444D-B1F0-A6F9B4CD58C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B640F791-A277-444D-B1F0-A6F9B4CD58C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,9 +10,9 @@ namespace WebApplication21.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        private IBookRepository<Book> _bookReepository;
+        private IEntityRepository<Book> _bookReepository;
 
-        public BookController(IBookRepository<Book> bookReepository)
+        public BookController(IEntityRepository<Book> bookReepository)
         {
             _bookReepository = bookReepository;
         }
@@ -23,14 +23,30 @@ namespace WebApplication21.Controllers
             return Ok(await _bookReepository.GetAll());
         }
 
+        [HttpGet("id")]
+        public async Task<ActionResult<Book>> GetBook(int id)
+        {
+            return Ok(await _bookReepository.Get(id));
+        }
+
         [HttpPost]
         [Route("")]
         [AllowAnonymous]
-        public async Task<IActionResult> AddProduct([FromBody] Book book)
+        public async Task<IActionResult> AddBook([FromBody] Book book)
         {
             _bookReepository.Post(book);
 
             return Ok(await _bookReepository.SaveChangesAsync());
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateBook(Book book)
+        {
+             _bookReepository.UpdateAsync(book);
+                
+            return Ok();
+
+           // return BadRequest();
         }
     }
 }

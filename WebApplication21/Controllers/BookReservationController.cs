@@ -10,9 +10,9 @@ namespace WebApplication21.Controllers
     [ApiController]
     public class BookReservationController : ControllerBase
     {
-        private IBookRepository<BookReservation> _bookReepository;
+        private IEntityRepository<BookReservation> _bookReepository;
 
-        public BookReservationController(IBookRepository<BookReservation> bookReepository)
+        public BookReservationController(IEntityRepository<BookReservation> bookReepository)
         {
             _bookReepository = bookReepository;
         }
