@@ -24,6 +24,8 @@ builder.Services.AddDbContext<WebApplication21DbContext>
 
 builder.Services.AddScoped(typeof(IEntityRepository<>), typeof(EntityRepository<>));
 
+builder.Services.AddScoped<IBookReservationRepository, BookReservationRepository>();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt =>
     {

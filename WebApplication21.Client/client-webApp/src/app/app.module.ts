@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { BookComponent } from './components/book/book.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CollapseModule } from 'ngx-bootstrap/collapse'
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { ReservationComponent } from './components/reservation/reservation.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    BookComponent
+    BookComponent,
+    ReservationComponent
   ],
   imports: [
     BrowserModule,

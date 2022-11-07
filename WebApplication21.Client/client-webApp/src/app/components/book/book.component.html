@@ -1,4 +1,11 @@
 
 <ul>
-    <li *ngFor="let book of books">{{book.title}}</li>
+    <li *ngFor="let book of books">
+        {{book.title}}
+        <!-- <button routerLink="/reservation" >reservation</button> -->
+        <app-reservation [book]="book">aaaaa</app-reservation>
+        <!-- <button routerLink='reservation'>
+            reservation
+        </button> -->
+    </li>
 </ul>

@@ -9,6 +9,11 @@ namespace WebApplication21.Core.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<RegisterDto, User>();
+            CreateMap<BookReservationDto, BookReservation>();
+            CreateMap<BookDto, Book>();
+
+            CreateMap<BookReservation, BookReservationDto>();
+            CreateMap<Book, BookDto>();
         }
     }
 }

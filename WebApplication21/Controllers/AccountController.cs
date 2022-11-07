@@ -53,9 +53,6 @@ namespace WebApplication21.Controllers
                 await _roleManager.CreateAsync(role);
             }
 
-            // if (!await _roleManager.RoleExistsAsync(AppUserRole.Admin))
-            //await _roleManager.CreateAsync(new IdentityRole(AppUserRole.Admin));
-
             var roleResult = await _userManager.AddToRoleAsync(user, "User");
 
             if (!roleResult.Succeeded) return BadRequest(result.Errors);
@@ -114,7 +111,7 @@ namespace WebApplication21.Controllers
                 await _roleManager.CreateAsync(role);
             }
 
-                var roleResult = await _userManager.AddToRoleAsync(user, "Admin");
+            var roleResult = await _userManager.AddToRoleAsync(user, "Admin");
 
             if (!roleResult.Succeeded) return BadRequest(result.Errors);
 

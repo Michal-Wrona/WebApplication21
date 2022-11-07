@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication21.Api.DTOs;
 using WebApplication21.Core.Entities;
 using WebApplication21.Core.Interfaces;
 
@@ -10,43 +12,57 @@ namespace WebApplication21.Controllers
     [ApiController]
     public class BookController : ControllerBase
     {
-        private IEntityRepository<Book> _bookReepository;
+        private readonly IEntityRepository<Book> _bookReepository;
+        private readonly IMapper _mapper;
 
-        public BookController(IEntityRepository<Book> bookReepository)
+        public BookController(IEntityRepository<Book> bookReepository, IMapper mapper)
         {
             _bookReepository = bookReepository;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetAll()
+        public async Task<ActionResult<IEnumerable<BookDto>>> GetAll()
         {
-            return Ok(await _bookReepository.GetAll());
+            var books = await _bookReepository.GetAll();
+
+            var booksDto = _mapper.Map<IEnumerable<BookDto>>(books);
+
+            return Ok(booksDto);
         }
 
         [HttpGet("id")]
-        public async Task<ActionResult<Book>> GetBook(int id)
+        public async Task<ActionResult<BookDto>> GetBook(int id)
         {
-            return Ok(await _bookReepository.Get(id));
+            var book = await _bookReepository.Get(id);
+
+            if (book == null) return NotFound($"Not found book with id:{id}");
+
+            var bookDto = _mapper.Map<BookDto>(book);
+
+            return Ok(bookDto);
         }
 
         [HttpPost]
         [Route("")]
         [AllowAnonymous]
-        public async Task<IActionResult> AddBook([FromBody] Book book)
+        public async Task<IActionResult> AddBook([FromBody] BookDto bookDto)
         {
+            var book = _mapper.Map<Book>(bookDto);
+
             _bookReepository.Post(book);
 
             return Ok(await _bookReepository.SaveChangesAsync());
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateBook(Book book)
+        public async Task<ActionResult> UpdateBook(BookDto bookDto)
         {
-             _bookReepository.UpdateAsync(book);
+            var book = _mapper.Map<Book>(bookDto);
+
+            await _bookReepository.UpdateAsync(book);
                 
             return Ok();
-
-           // return BadRequest();
         }
     }
 }
