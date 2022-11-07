@@ -22,8 +22,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<WebApplication21DbContext>
     (opt => opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// builder.Services.AddScoped<IBookRepository<BaseEntity>, BookRepository<BaseEntity>>();
-
 builder.Services.AddScoped(typeof(IEntityRepository<>), typeof(EntityRepository<>));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -60,6 +58,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4210"));
 
 app.UseAuthentication();
 

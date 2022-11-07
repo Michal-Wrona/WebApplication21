@@ -9,7 +9,6 @@ namespace WebApplication21.Core.Helpers
         public AutoMapperProfiles()
         {
             CreateMap<RegisterDto, User>();
-            CreateMap<BookUpdateDto, Book>();
         }
     }
 }
