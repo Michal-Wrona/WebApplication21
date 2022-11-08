@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication21.Core", "We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication21.Api", "WebApplication21.Api\WebApplication21.Api.csproj", "{B640F791-A277-444D-B1F0-A6F9B4CD58C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication21.Tests", "TestProject1\WebApplication21.Tests.csproj", "{B6DF8293-F814-41C5-BAF4-CA184B4EE59D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplication21.Tests", "TestProject1\WebApplication21.Tests.csproj", "{B6DF8293-F814-41C5-BAF4-CA184B4EE59D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
